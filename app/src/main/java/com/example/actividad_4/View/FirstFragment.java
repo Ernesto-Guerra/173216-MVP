@@ -45,6 +45,14 @@ public class FirstFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     public FirstFragmentModel first;
+    public static boolean creando = true;
+    public static TextView campo1;
+    public static TextView campo2;
+    public static TextView campo3;
+    public static String idedit = "";
+
+    private Button aubutton;
+    private Button cancelbutton;
 
     private OnFragmentInteractionListener mListener;
 
@@ -74,6 +82,7 @@ public class FirstFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         first = new FirstFragmentModel(FirstFragment.this);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -85,11 +94,66 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         final View mimenu = inflater.inflate(R.layout.fragment_first,container,false);
+
+
 
         return first.obtenerDatos(mimenu);
 
 
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        campo1 = (TextView) getView().findViewById(R.id.nombre);
+        campo2 = (TextView) getView().findViewById(R.id.apellido);
+        campo3 = (TextView) getView().findViewById(R.id.edad);
+
+        aubutton = (Button) getView().findViewById(R.id.addupdate);
+
+        aubutton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                crear();
+
+            }
+        });
+
+        cancelbutton = (Button) getView().findViewById(R.id.cancel);
+
+        cancelbutton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                cancel();
+
+            }
+        });
+    }
+
+    public static void llenar(String valor1, String valor2, String valor3){
+        campo1.setText(valor1);
+        campo2.setText(valor2);
+        campo3.setText(valor3);
+        creando = false;
+
+    }
+
+    public void crear(){
+        if(creando){
+            first.crearU(creando,campo1.getText().toString(),campo2.getText().toString(),campo3.getText().toString());
+        }
+        else{
+            first.editarU(creando,campo1.getText().toString(),campo2.getText().toString(),campo3.getText().toString(),idedit);
+        }
+
+    }
+
+    public void cancel(){
+        campo1.setText("");
+        campo2.setText("");
+        campo3.setText("");
+        creando = true;
     }
 
     public void fillData(JSONArray response){

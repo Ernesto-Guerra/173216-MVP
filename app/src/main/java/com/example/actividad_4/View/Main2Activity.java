@@ -23,8 +23,9 @@ public class Main2Activity extends AppCompatActivity implements FirstFragment.On
 
         if (!dato.equals("smart")){
             getSupportFragmentManager().beginTransaction().add(R.id.fragment2,firstFragment).commit();
+            //getSupportFragmentManager().beginTransaction().add(R.id.fragment2,secondFragment).commit();
         }else{
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment2,secondFragment).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment2,firstFragment).commit();
         }
 
     }

@@ -5,7 +5,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class Cliente {
-public static final String BASE_URL = "http://192.168.1.79:8000/";
+public static final String BASE_URL = "http://192.168.1.98:8000/";
 
 public static final String GET_ALL = "api/v1/user/user_list/";
 
